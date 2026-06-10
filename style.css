@@ -445,7 +445,7 @@ body.dark .navbar.scrolled {
   transform: translateY(-4px);
 }
 
-/* ========== HERO SECTION (modern journal style with decorative frame) ========== */
+/* ========== HERO SECTION ========== */
 .hero {
   display: flex;
   align-items: center;
@@ -459,6 +459,7 @@ body.dark .navbar.scrolled {
 .hero-content {
   flex: 1;
   max-width: 600px;
+  position: relative;
 }
 
 .hero-tagline-top {
@@ -564,7 +565,7 @@ body.dark .navbar.scrolled {
   font-weight: 300;
 }
 
-/* decorative frame around profile image */
+/* ========== PROFILE IMAGE WITH DECORATIVE FRAME & LAYERS ========== */
 .hero-image-container {
   flex: 1;
   display: flex;
@@ -572,47 +573,156 @@ body.dark .navbar.scrolled {
   position: relative;
 }
 
-.hero-image-container::before {
-  content: '';
+/* paper layers (background sheets) */
+.paper-layer {
   position: absolute;
-  top: -12px;
-  left: -12px;
-  right: -12px;
-  bottom: -12px;
-  border: 2px solid var(--accent-pink);
-  border-radius: 110px 110px 30px 30px;
-  pointer-events: none;
+  width: 420px;
+  height: 540px;
+  background: #e9ddcf;
+  border-radius: 35px;
   z-index: 0;
+  opacity: 0.4;
   transition: all 0.3s ease;
 }
 
-.hero-image-container::after {
-  content: '✧';
-  position: absolute;
-  bottom: -20px;
+body.dark .paper-layer {
+  background: #3a322c;
+  opacity: 0.3;
+}
+
+.paper-1 {
+  transform: rotate(-7deg);
+  left: -25px;
+  top: 20px;
+}
+
+.paper-2 {
+  transform: rotate(5deg);
   right: -20px;
-  font-size: 1.8rem;
-  color: var(--accent-green);
-  background: var(--bg-color);
-  width: 40px;
-  height: 40px;
+  top: 10px;
+  background: #f4ebdf;
+}
+
+body.dark .paper-2 {
+  background: #4a4038;
+}
+
+/* journal notes (stickers) */
+.journal-note {
+  position: absolute;
+  background: rgba(255, 252, 240, 0.92);
+  backdrop-filter: blur(4px);
+  padding: 8px 16px;
+  border-radius: 40px;
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--accent-pink);
+  white-space: nowrap;
+  z-index: 3;
+  letter-spacing: 0.3px;
+}
+
+body.dark .journal-note {
+  background: rgba(35, 30, 26, 0.92);
+  color: var(--text-secondary);
+}
+
+.note-1 {
+  left: -120px;
+  top: 120px;
+  transform: rotate(-8deg);
+}
+
+.note-2 {
+  right: -120px;
+  top: 220px;
+  transform: rotate(8deg);
+}
+
+/* circular stamp */
+.journal-stamp {
+  position: absolute;
+  bottom: 30px;
+  right: -80px;
+  width: 120px;
+  height: 120px;
+  border: 2px solid var(--accent-green);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--accent-green);
+  background: rgba(143, 158, 139, 0.05);
+  backdrop-filter: blur(4px);
+  z-index: 3;
+  opacity: 0.8;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+/* floating leaves */
+.leaf {
+  position: absolute;
+  font-size: 2rem;
+  z-index: 3;
+  opacity: 0.7;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  animation: leafFloat 6s infinite alternate ease-in-out;
+}
+
+.leaf-1 {
+  top: 40px;
+  right: -60px;
+  transform: rotate(20deg);
+  animation-duration: 7s;
+}
+
+.leaf-2 {
+  bottom: 100px;
+  left: -70px;
+  transform: rotate(-20deg);
+  animation-duration: 5s;
+}
+
+@keyframes leafFloat {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-12px) rotate(5deg); }
+}
+
+/* quote card */
+.quote-card {
+  position: absolute;
+  left: -90px;
+  bottom: 70px;
+  width: 150px;
+  padding: 12px 15px;
+  background: var(--card-bg);
+  border-radius: 18px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transform: rotate(-5deg);
+  z-index: 3;
   border: 1px solid var(--accent-pink);
-  pointer-events: none;
-  z-index: 1;
+  text-align: center;
+  backdrop-filter: blur(2px);
 }
 
-.hero-image-container:hover::before {
-  top: -16px;
-  left: -16px;
-  right: -16px;
-  bottom: -16px;
-  border-color: var(--accent-green);
+body.dark .quote-card {
+  background: var(--card-bg);
 }
 
+/* main profile image */
 .hero-img {
   width: 400px;
   height: 500px;
@@ -622,14 +732,14 @@ body.dark .navbar.scrolled {
   border: 8px solid white;
   transition: all 0.4s ease;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .hero-image-container:hover .hero-img {
   transform: scale(1.02);
 }
 
-/* floating leaves decoration */
+/* floating leaves decoration (background leaves) */
 .deco-leaf {
   position: absolute;
   z-index: -1;
@@ -1065,96 +1175,32 @@ footer {
   .hero-quote {
     max-width: 100%;
   }
-  /* ========== CREATIVE FRAME: BOOK + PEN + LEAF around profile image ========== */
-.hero-image-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  flex: 1;
-}
 
-/* outer frame: open book shape */
-.hero-image-container::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  left: -20px;
-  right: -20px;
-  bottom: -20px;
-  background: transparent;
-  border: 2px solid var(--accent-pink);
-  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-  box-shadow: 0 0 0 6px rgba(143, 158, 139, 0.1), inset 0 0 0 2px rgba(219, 196, 176, 0.5);
-  pointer-events: none;
-  z-index: 0;
-  transition: all 0.4s ease;
-  animation: softPulseFrame 3s infinite alternate;
-}
+  .hero-img {
+    width: 280px;
+    height: 350px;
+    margin-bottom: 2rem;
+  }
 
-/* pen & leaf decoration corners */
-.hero-image-container::after {
-  content: '✒️ 🌿';
-  position: absolute;
-  bottom: -30px;
-  right: -30px;
-  font-size: 2rem;
-  background: var(--bg-color);
-  padding: 0 8px;
-  border-radius: 60px;
-  pointer-events: none;
-  z-index: 2;
-  opacity: 0.85;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-}
+  /* hide extra decorative elements on mobile for cleaner look */
+  .paper-layer,
+  .journal-note,
+  .journal-stamp,
+  .leaf,
+  .quote-card {
+    display: none;
+  }
 
-/* extra leaf on top-left corner */
-.hero-image-container .frame-leaf {
-  position: absolute;
-  top: -25px;
-  left: -25px;
-  font-size: 2.2rem;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0.8;
-  transform: rotate(-15deg);
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-}
+  .leaf-center-right {
+    display: none;
+  }
 
-/* small sparkle dots around frame */
-.hero-image-container .frame-dot {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: var(--accent-green);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 2;
-  opacity: 0.6;
-}
+  .skills-wrapper {
+    gap: 2rem;
+    text-align: center;
+  }
 
-/* dot positions */
-.hero-image-container .frame-dot:nth-child(1) { top: -10px; left: 50%; transform: translateX(-50%); }
-.hero-image-container .frame-dot:nth-child(2) { bottom: -10px; left: 20%; }
-.hero-image-container .frame-dot:nth-child(3) { right: -10px; top: 35%; }
-.hero-image-container .frame-dot:nth-child(4) { left: -10px; top: 60%; }
-
-/* floating animation for frame */
-@keyframes softPulseFrame {
-  0% { border-color: var(--accent-pink); box-shadow: 0 0 0 4px rgba(143,158,139,0.05); }
-  100% { border-color: var(--accent-green); box-shadow: 0 0 0 12px rgba(143,158,139,0.12); }
-}
-
-.hero-image-container:hover::before {
-  transform: scale(1.02);
-  border-color: var(--accent-green);
-}
-
-.hero-img {
-  position: relative;
-  z-index: 1;
-  transition: transform 0.4s ease;
-}
-
-.hero-image-container:hover .hero-img {
-  transform: scale(1.01);
+  .section {
+    padding: 4rem 5%;
+  }
 }
