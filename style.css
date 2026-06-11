@@ -983,6 +983,37 @@ body.dark .quote-card {
   gap: 0.8rem;
 }
 
+#writing .cards-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  gap: 2rem;
+  padding-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  scroll-behavior: smooth;
+}
+
+#writing .card {
+  flex: 0 0 320px;
+  scroll-snap-align: start;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* hide scrollbar but keep functionality (optional – looks cleaner) */
+#writing .cards-container::-webkit-scrollbar {
+  height: 6px;
+}
+#writing .cards-container::-webkit-scrollbar-track {
+  background: var(--accent-pink);
+  border-radius: 10px;
+}
+#writing .cards-container::-webkit-scrollbar-thumb {
+  background: var(--accent-green);
+  border-radius: 10px;
+}
+
 /* ========== SKILLS ========== */
 .skills-wrapper {
   display: flex;
@@ -1202,5 +1233,391 @@ footer {
 
   .section {
     padding: 4rem 5%;
+  }
+}
+
+
+.writing-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin: 2rem 0 3rem;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid var(--accent-pink);
+  padding: 0.6rem 1.2rem;
+  border-radius: 40px;
+  font-family: 'Caveat', cursive;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+  letter-spacing: 0.3px;
+}
+
+.filter-btn:hover {
+  background: var(--accent-pink);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  border-color: var(--accent-green);
+}
+
+.filter-btn.active {
+  background: var(--accent-green);
+  color: white;
+  border-color: var(--accent-green);
+  box-shadow: 0 4px 10px rgba(143,158,139,0.3);
+}
+
+/* filter animation */
+.card {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.card.hide-card {
+  display: none;
+}
+
+/* optional: subtle stagger effect when filtering */
+.cards-container {
+  transition: all 0.2s;
+}
+
+
+/* ========== PROJECTS – CAROUSEL + GRID TOGGLE ========== */
+.project-filter {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.project-filter-btn {
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.2rem 0;
+  position: relative;
+  transition: 0.2s;
+}
+
+.project-filter-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-green);
+  transition: width 0.25s;
+}
+
+.project-filter-btn:hover::after,
+.project-filter-btn.active::after {
+  width: 100%;
+}
+
+.project-filter-btn.active {
+  color: var(--accent-green);
+}
+
+/* view toggle */
+.view-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.view-btn {
+  background: transparent;
+  border: 1px solid var(--accent-pink);
+  padding: 0.3rem 1.2rem;
+  border-radius: 30px;
+  font-family: 'Caveat', cursive;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.view-btn.active {
+  background: var(--accent-green);
+  color: white;
+  border-color: var(--accent-green);
+}
+
+/* Carousel Styles */
+.project-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.carousel-track-container {
+  overflow: hidden;
+  width: 85%;
+  border-radius: 20px;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+  gap: 0;
+}
+
+.carousel-card {
+  flex: 0 0 100%;
+  background: var(--card-bg);
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid var(--accent-pink);
+  margin: 0.5rem;
+}
+
+.carousel-card .polaroid-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.carousel-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.carousel-card .polaroid-meta {
+  font-size: 0.75rem;
+  color: var(--accent-pink);
+  margin-bottom: 0.8rem;
+}
+
+.carousel-card p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.carousel-card .polaroid-tags {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.carousel-card .polaroid-tags span {
+  background: var(--accent-pink);
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+}
+
+.carousel-btn {
+  background: var(--accent-green);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.carousel-btn:hover {
+  background: var(--accent-green-hover);
+  transform: scale(1.05);
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-pink);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.dot.active {
+  background: var(--accent-green);
+  width: 24px;
+  border-radius: 10px;
+}
+
+/* Grid Mode */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.grid-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  transition: 0.2s;
+  border: 1px solid var(--accent-pink);
+}
+
+.grid-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.grid-card .polaroid-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ========== LEADERSHIP – CREDENTIAL BOARD ========== */
+.leadership-subtitle {
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  color: var(--accent-green);
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+}
+
+.credential-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.credential-card {
+  background: var(--card-bg);
+  border-radius: 28px;
+  padding: 1.8rem;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  border: 1px solid var(--accent-pink);
+  overflow: hidden;
+}
+
+.credential-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 32px rgba(0,0,0,0.1);
+  border-color: var(--accent-green);
+}
+
+/* decorative ribbon */
+.credential-ribbon {
+  position: absolute;
+  top: 18px;
+  right: -28px;
+  background: var(--accent-pink);
+  color: var(--text-primary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.3rem 2rem;
+  transform: rotate(45deg);
+  width: 110px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.credential-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.credential-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.credential-meta {
+  font-size: 0.7rem;
+  color: var(--accent-green);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.credential-preview {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.credential-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  margin-bottom: 1rem;
+}
+
+.credential-details ul {
+  padding-left: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.credential-details li {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.credential-card.expanded .credential-details {
+  max-height: 200px; /* adjust if needed */
+}
+
+.credential-toggle {
+  background: transparent;
+  border: 1px solid var(--accent-pink);
+  padding: 0.4rem 1rem;
+  border-radius: 40px;
+  font-family: 'Caveat', cursive;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 0.5rem;
+}
+
+.credential-toggle:hover {
+  background: var(--accent-pink);
+  color: var(--text-primary);
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .credential-grid {
+    gap: 1.5rem;
+  }
+  .credential-ribbon {
+    font-size: 0.6rem;
+    padding: 0.2rem 1.8rem;
+    top: 14px;
+    right: -32px;
   }
 }
