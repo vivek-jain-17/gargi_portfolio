@@ -1621,3 +1621,123 @@ footer {
     right: -32px;
   }
 }
+/* ========== EDUCATION SECTION (timeline style) ========== */
+.education-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.edu-timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+/* vertical line */
+.edu-timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  bottom: 20px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-pink), var(--accent-green));
+  border-radius: 2px;
+}
+
+.edu-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.03);
+  border: 1px solid var(--accent-pink);
+  transition: all 0.3s ease;
+}
+
+.edu-item:hover {
+  transform: translateX(6px);
+  border-color: var(--accent-green);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+}
+
+.edu-icon {
+  font-size: 2rem;
+  min-width: 50px;
+  text-align: center;
+}
+
+.edu-content {
+  flex: 1;
+}
+
+.edu-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  margin-bottom: 0.3rem;
+  color: var(--text-primary);
+}
+
+.edu-meta {
+  font-size: 0.8rem;
+  color: var(--accent-green);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.3px;
+}
+
+.edu-content p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.edu-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.edu-tags span {
+  background: var(--accent-pink);
+  color: var(--text-primary);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.edu-year {
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  color: var(--accent-green);
+  font-weight: 600;
+  min-width: 70px;
+  text-align: right;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .edu-timeline {
+    padding-left: 0;
+  }
+  .edu-timeline::before {
+    display: none;
+  }
+  .edu-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .edu-year {
+    text-align: left;
+    margin-top: 0.3rem;
+  }
+  .edu-icon {
+    margin-bottom: 0.2rem;
+  }
+}
